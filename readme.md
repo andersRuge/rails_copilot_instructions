@@ -26,7 +26,7 @@ Each instruction file uses frontmatter to specify which files the instructions a
 2. Customize the instruction files as needed for your specific project requirements
 3. GitHub Copilot will use these instructions when generating code in files matching the patterns specified in each instruction's frontmatter
 
-The main `.github/copilot-instructions.md` file provides high-level guidance and references the specialized instruction files for deeper context.
+The main `[.github/copilot-instructions.md](.github/copilot-instructions.md)` file provides high-level guidance and references the specialized instruction files for deeper context.
 
 ## Technology Stack
 
