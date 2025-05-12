@@ -16,6 +16,7 @@ The repository is organized with specialized instruction files in the `.github/i
 - **[kamal.instructions.md](.github/instructions/kamal.instructions.md)** - Deployment configuration and practices
 - **[tailwind.instructions.md](.github/instructions/tailwind.instructions.md)** - Styling guidelines with Tailwind CSS
 - **[importmaps.instructions.md](.github/instructions/importmaps.instructions.md)** - JavaScript dependency management
+- **[view-helpers.instructions.md](.github/instructions/view-helpers.instructions.md)** - Action View Helpers usage and best practices
 - **[hotwire-native.instructions.md](.github/instructions/hotwire-native.instructions.md)** - Guidelines for Hotwire Native mobile apps
 
 Each instruction file uses frontmatter to specify which files the instructions apply to, ensuring context-specific guidance.
