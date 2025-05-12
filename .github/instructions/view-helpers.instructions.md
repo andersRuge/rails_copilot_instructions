@@ -167,3 +167,86 @@ end
 - Mock complex dependencies in helper tests
 - Test for proper HTML escaping
 - Ensure helper performance is acceptable
+
+## JavaScript Helpers and Security
+- Use standard Rails helpers for JavaScript integration
+- Implement CSP nonces for all inline scripts
+- Leverage ES6 module patterns with Import Maps
+- Follow security best practices to prevent XSS
+- Properly escape dynamic JavaScript content
+
+### JavaScript Tag Helpers
+- Use `javascript_include_tag` with import maps for external scripts
+- Use `javascript_tag` with nonces for inline JavaScript 
+- Use `javascript_path` to generate paths to script assets
+- Use `javascript_csp_nonce` to access the current CSP nonce
+- Use `data` attributes with Stimulus controllers instead of inline JS
+
+```ruby
+# Preferred usage with nonce for inline JavaScript
+<%= javascript_tag nonce: true do %>
+  document.addEventListener("turbo:load", function() {
+    console.log("Page loaded via Turbo");
+  });
+<% end %>
+
+# External scripts with attributes
+<%= javascript_include_tag "chart", nonce: true, defer: true %>
+
+# Avoid inline event handlers in favor of data attributes with Stimulus
+# Bad: <button onclick="doSomething()">Click me</button>
+# Good: <button data-controller="button" data-action="click->button#doSomething">Click me</button>
+```
+
+### Content Security Policy and Nonces
+- Always use nonces for inline JavaScript to comply with CSP
+- Enable and configure CSP in your Rails application
+- Use automatic nonce generation for all script tags
+- Combine nonces with strict CSP headers
+- Never disable CSP or use unsafe-inline as a workaround
+
+```ruby
+# In config/initializers/content_security_policy.rb
+Rails.application.config.content_security_policy do |policy|
+  policy.default_src :self
+  policy.script_src :self, :https, :unsafe_eval, :nonce
+  policy.style_src :self, :https, :nonce
+  
+  # Report CSP violations to a specified URL
+  policy.report_uri "/csp-violation-report"
+end
+
+# Enable automatic nonce generation
+Rails.application.config.content_security_policy_nonce_generator = ->(request) {
+  SecureRandom.base64(16)
+}
+
+# In view template using a nonce for inline script
+<%= tag.script nonce: true do %>
+  console.log("This script uses a CSP nonce");
+<% end %>
+```
+
+### JavaScript Helper Techniques
+- Use `escape_javascript` (or alias `j`) to escape JS in ERB
+- Use `json_escape` (or alias `json`) for JSON in script tags
+- Generate dynamic JavaScript using JavaScript templates
+- Use Turbo Stream responses for dynamic page updates
+- Consider Stimulus controllers for complex JavaScript behavior
+
+```ruby
+# Escaping JavaScript in ERB
+<%= javascript_tag nonce: true do %>
+  const userGreeting = "<%= j @user.greeting %>";
+  console.log(userGreeting);
+<% end %>
+
+# Using JSON in JavaScript contexts
+<%= javascript_tag nonce: true do %>
+  const userData = <%= raw json_escape(@user.to_json) %>;
+  console.log(userData.name);
+<% end %>
+
+# Using JavaScript templates (in app/javascript/templates)
+<%= javascript_include_tag "templates/chart_config", nonce: true %>
+```
