@@ -17,6 +17,7 @@ applyTo: "**/*job.rb,**/queue*.rb,**/solid_queue*.rb,**/recurring.yml"
 - Set proper thread counts based on job characteristics and database capacity
 - Make sure to add "config.solid_queue.connects_to = { database: { writing: :queue } }" to the development environment
 - Ensure that the database.yml file has a separate database for the queue, e.g., "queue: <<: *default database: storage/development_queue.sqlite3 migrations_paths: db/queue_migrate"
+- Make sure that "plugin :solid_queue if ENV["SOLID_QUEUE_IN_PUMA"] || Rails.env.development?" is added to the puma configuration files
 
 ## Worker Configuration Example
 ```yaml
