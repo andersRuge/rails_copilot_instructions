@@ -7,7 +7,6 @@ applyTo: "**/*.rb"
 - Use Rails 8 features like Solid Queue for background job processing
 - Follow Rails conventions for naming and file organization
 - Use ActiveModel attributes API for defining model attributes
-- Leverage Rails requestable module for API endpoints when needed
 - Use Rails built-in testing tools (Minitest) for all test cases
 - Use SQLite for development and production environments
 

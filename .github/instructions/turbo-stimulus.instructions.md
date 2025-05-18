@@ -73,7 +73,12 @@ applyTo: "**/*.js,**/*.erb,**/*.html.erb"
 
 ## Stimulus Targets
 - Define targets for elements that will be manipulated
+- Ensure the controller has clearly defined targets
+- Action methods are focused on single responsibilities
+- The HTML uses the proper data attributes for actions and targets
+- Event handling is done declaratively through data attributes
 - Give targets descriptive names based on their purpose
+- Use proper Stimulus target accessors to leverage Stimulus's built-in functionality rather than falling back to manual DOM querying
 - Use target accessors in controller methods (`this.targetElement`)
 - Check for target existence before manipulating (`this.hasTargetElement`)
 - Use target collection when working with multiple similar elements
