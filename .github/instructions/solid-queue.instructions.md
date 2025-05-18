@@ -15,6 +15,8 @@ applyTo: "**/*job.rb,**/queue*.rb,**/solid_queue*.rb,**/recurring.yml"
 - Use separate database for queue in production for better performance
 - Configure appropriate polling intervals based on job urgency and volume
 - Set proper thread counts based on job characteristics and database capacity
+- Make sure to add "config.solid_queue.connects_to = { database: { writing: :queue } }" to the development environment
+- Ensure that the database.yml file has a separate database for the queue, e.g., "queue: <<: *default database: storage/development_queue.sqlite3 migrations_paths: db/queue_migrate"
 
 ## Worker Configuration Example
 ```yaml
@@ -136,3 +138,16 @@ end
 - Monitor database size and performance, especially for high-volume queues
 - Schedule regular maintenance tasks for database optimization
 - Configure appropriate retention periods for job history
+
+## Commands
+
+Here are some common commands:
+- SolidQueue::Job.count
+- SolidQueue::ReadyExecution.count
+- SolidQueue::ScheduledExecution.count
+- SolidQueue::ClaimedExecution.count
+- SolidQueue::FailedExecution.count
+- SolidQueue::Job.finished.count
+- SolidQueue::FailedExecution.all.map { |fe| { job_id: fe.job_id, error: fe.error, job_class: fe.job.class_name, arguments: fe.job.arguments } }
+- SolidQueue::Job.find_by(active_job_id: "your-active-job-id")
+
