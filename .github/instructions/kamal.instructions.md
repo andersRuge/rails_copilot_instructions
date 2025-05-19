@@ -19,8 +19,9 @@ applyTo: "**/deploy.yml,**/Dockerfile,**/*.rb"
 - `kamal lock/unlock`: Control deployment access (prevent deployments)
 - `kamal redeploy`: Force full redeploy even when image hasn't changed
 - `kamal restart`: Restart application containers without new deployment
-- `kamal exec`: Execute command in app container (e.g., `kamal exec rails c`)
+- `kamal app exec`: Execute command in app container (e.g., `kamal exec 'bin/rails c'`)
 - `kamal app logs`: View application logs
+
 
 ## Deploy.yml Configuration
 ```yaml
