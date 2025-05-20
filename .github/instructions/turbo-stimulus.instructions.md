@@ -63,6 +63,7 @@ applyTo: "**/*.js,**/*.erb,**/*.html.erb"
 - Use values API for dynamic properties that can change
 - Document controllers with clear comments describing their purpose
 - Import controllers properly using Import Maps
+- You do not need to import each Stimulus controller individually in the `index.js` file.
 
 ## Stimulus Actions
 - Use meaningful action names based on the behavior (e.g., `submit`, `toggle`)
