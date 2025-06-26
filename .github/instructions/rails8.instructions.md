@@ -44,3 +44,7 @@ applyTo: "**/*.rb"
 - Use meaningful queue names based on purpose
 - Set appropriate retry behavior for each job
 - Use perform_later for background processing
+
+## Accessing user and authetication
+- Checking whether a user is logged in from a controller is done by authenticated?
+- Accessing the current user is done by Current.user
